@@ -234,7 +234,8 @@ h4 { font-family: var(--body); font-size: 16px; font-weight: 600; color: var(--n
 .people { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
 .person { display: grid; gap: 4px; align-content: start; min-width: 0; }
 .portrait {
-  width: 100%; max-width: 100%; aspect-ratio: 4 / 5; margin-bottom: 12px;
+  display: block; object-fit: cover;
+  width: 100%; max-width: 100%; aspect-ratio: 1 / 1; height: auto; margin-bottom: 12px;
   border-radius: var(--r-card); background: var(--sky); color: var(--navy);
   display: grid; place-items: center;
   font-family: var(--head); font-weight: 600; font-size: clamp(36px, 4vw, 52px); letter-spacing: 0.02em;
@@ -408,9 +409,23 @@ h4 { font-family: var(--body); font-size: 16px; font-weight: 600; color: var(--n
 .address-card strong { color: var(--navy); }
 
 /* ---------- Footer ---------- */
-.site-footer { background: var(--navy); color: var(--on-navy); padding-block: clamp(48px, 6vw, 80px) 32px; font-size: 15px; }
-.site-footer a { color: var(--white); text-decoration: none; }
-.site-footer a:hover { text-decoration: underline; }
+.site-footer { background: var(--navy); color: var(--on-navy); font-size: 15px; }
+.footer-main { padding-block: clamp(48px, 6vw, 80px) 32px; }
+.footer-main a { color: var(--white); text-decoration: none; }
+.footer-main a:hover { text-decoration: underline; }
+
+/* Accolades and memberships: a white band at the top of every footer, so the award and MFAA marks show in their own colours */
+.credentials { background: var(--white); border-top: 1px solid var(--line); color: var(--slate); padding-block: clamp(28px, 3.5vw, 40px); }
+.cred-grid { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 28px 56px; }
+.cred-group { display: grid; gap: 14px; min-width: 0; }
+.cred-group h2 { font: 600 17px/1.35 var(--head); color: var(--navy); }
+.cred-group p { font-size: 14px; line-height: 1.45; }
+.badges { list-style: none; display: flex; flex-wrap: wrap; gap: 12px; }
+.badges img { display: block; width: 72px; height: 72px; }
+@media (max-width: 640px) {
+  .badges { gap: 10px; }
+  .badges img { width: 56px; height: 56px; }
+}
 .footer-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 0.8fr)) minmax(0, 1fr); gap: clamp(28px, 4vw, 56px); }
 .footer-logo { justify-self: start; display: inline-block; background: var(--white); border-radius: var(--r-control); padding: 16px 18px; }
 .footer-logo img { display: block; width: 180px; height: auto; }

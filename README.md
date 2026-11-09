@@ -16,6 +16,8 @@ Static HTML/CSS/JS site for pjfinancialsolutions.com.au, built to replace the Di
 | `styles.css`, `site.js` | Shared styles and scripts, no dependencies |
 | `fonts/` | Self-hosted Manrope + Inter (SIL OFL), Latin subset |
 | `img/` | Logo (raster from the brand guide), home hero image, social share image, app icon |
+| `img/team/` | Staff portraits (from the old site, upscaled, cut out and placed on the brand Sky Wash background) |
+| `img/badges/` | FAST Business Excellence Awards finalist badges (2015–2022) and MFAA badges, cut to clean circles; shown in the footer band on every page |
 | `api/enquiry.js` | Vercel function that emails form enquiries via Resend |
 | `vercel.json` | Clean URLs, 301s from every old WordPress URL, security headers |
 | `sitemap.xml`, `robots.txt`, `site.webmanifest`, `favicon.png`, `favicon.ico` | SEO and icons |
@@ -41,9 +43,9 @@ Header and footer are repeated in each page. If you change the nav or footer, ch
 - [ ] **Paul's email.** Site uses `paul@pjfs.com.au`; the dispute policy uses `paul@pjfinancialsolutions.com.au`.
 - [ ] **Complaints policy.** The current PDF was last reviewed 1 Oct 2018 and uses 21/30/45-day timeframes from before ASIC RG 271 (Oct 2021). Ask BLSSA for the current complaints policy, Privacy Policy and Credit Guide, and confirm BLSSA's complaints contact details (Level 15, 360 Elizabeth St Melbourne, 03 9320 1082, resolutions@BLSSA.com.au, copied from the 2018 PDF). Add the PDFs to `/downloads/` and link them from `privacy.html`.
 - [ ] **Postal address** PO Box 594, South Fremantle WA 6162 (from the 2018 PDF) is still current.
-- [ ] **Awards wording.** Site says "finalist in industry business excellence awards in 2015, 2018, 2019, 2020 and 2022, in residential and commercial categories", read from the old badge filenames. Get exact award names to list properly.
+- [x] **Awards.** Footer shows all eight FAST finalist badges (2015 residential + commercial, 2017–2022) and both MFAA badges; About page copy matches.
 - [ ] **Lender panel.** Site lists ANZ, Commonwealth Bank, NAB, Westpac, ING, Suncorp, St.George, Resimac. Three old logos were unlabelled screenshots; add any missing lenders.
-- [ ] **Team headshots.** Initials tiles are 4:5; drop in natural portraits at the same ratio (min 800×1000px), consistent light and background per the brand guide.
+- [x] **Team photos.** Client approved using the old-site photos (208–233px originals); refreshed onto the brand background. New headshots would look sharper on high-resolution screens.
 - [ ] **Vector logo.** `img/pj-logo.png` is the 379×85 raster from the brand guide (cropped). Swap in the original vector (SVG) for sharp rendering at 220px.
 - [ ] **Hero photography.** The home hero house is the AI-generated creative reference from the brand guide. Replace with commissioned or licensed photography before launch.
 - [ ] **Office hours** (not on the old site; add to contact page if wanted).
