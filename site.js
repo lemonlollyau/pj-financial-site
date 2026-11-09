@@ -1,4 +1,4 @@
-/* P&J Financial Solutions — site scripts. No dependencies. */
+/* P & J Financial Solutions — site scripts. No dependencies. */
 (function () {
   "use strict";
 
@@ -11,10 +11,10 @@
   var toggle = document.querySelector(".menu-toggle");
   var nav = document.getElementById("site-nav");
   if (toggle && nav) {
-    var mq = window.matchMedia("(max-width: 1140px)");
+    var mq = window.matchMedia("(max-width: 1120px)");
     var setOpen = function (open) {
       toggle.setAttribute("aria-expanded", String(open));
-      toggle.textContent = open ? "Close" : "Menu";
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
       nav.setAttribute("data-open", String(open));
     };
     var sync = function () { if (mq.matches) { setOpen(false); } else { nav.removeAttribute("data-open"); } };
@@ -28,32 +28,7 @@
     });
   }
 
-  /* ---- Home: "What are you looking to finance?" picker ---- */
-  var picker = document.getElementById("picker");
-  if (picker) {
-    var copy = {
-      home: { text: "First home, next home or an investment property. We'll work out what you can borrow and which lenders suit you.", read: "home-loans.html", readLabel: "Read about home loans" },
-      refinance: { text: "We'll review your current loan against today's options and handle the switch if it makes sense.", read: "home-loans.html#refinancing", readLabel: "Read about refinancing" },
-      commercial: { text: "Buying premises or funding the business. We'll put together a proposal lenders can say yes to.", read: "commercial-finance.html", readLabel: "Read about commercial finance" },
-      equipment: { text: "Cars, utes, trucks, machinery or a boat, for your business or for you.", read: "equipment-finance.html", readLabel: "Read about equipment finance" }
-    };
-    var out = document.getElementById("picker-text");
-    var go = document.getElementById("picker-go");
-    var read = document.getElementById("picker-read");
-    var update = function () {
-      var checked = picker.querySelector("input[name=need]:checked");
-      if (!checked) { return; }
-      var c = copy[checked.value];
-      out.textContent = c.text;
-      go.setAttribute("href", "contact.html#" + checked.value);
-      read.setAttribute("href", c.read);
-      read.textContent = c.readLabel;
-    };
-    picker.addEventListener("change", update);
-    update();
-  }
-
-  /* ---- Contact: prefill "looking for" from the link, submit enquiry ---- */
+  /* ---- Enquiry form: prefill "finance need" from the link, submit ---- */
   var form = document.getElementById("enquiry-form");
   if (form) {
     var map = { home: "Home loan", refinance: "Refinance", commercial: "Commercial finance", equipment: "Equipment or vehicle finance" };
@@ -67,6 +42,7 @@
 
     var status = document.getElementById("form-status");
     var button = form.querySelector("button[type=submit]");
+    var label = button.querySelector(".btn-label") || button;
     var show = function (state, msg) {
       status.hidden = false;
       status.setAttribute("data-state", state);
@@ -93,7 +69,7 @@
       var data = {};
       new FormData(form).forEach(function (v, k) { data[k] = String(v); });
       button.disabled = true;
-      button.textContent = "Sending…";
+      label.textContent = "Sending…";
 
       fetch("/api/enquiry", {
         method: "POST",
@@ -107,7 +83,7 @@
         show("error", "Your enquiry couldn't be sent from this page. Please call us on (08) 9437 3666 or email admin@pjfinancialsolutions.com.au.");
       }).finally(function () {
         button.disabled = false;
-        button.textContent = "Send enquiry";
+        label.textContent = "Send enquiry";
       });
     });
   }
@@ -150,17 +126,17 @@
       var area = function (pts) { return line(pts) + " L" + x(Math.min(pts.length - 1, termYears)).toFixed(1) + " " + y(0) + " L" + x(0) + " " + y(0) + " Z"; };
       var ticks = [0, Math.round(termYears / 2), termYears];
       var grid = [0, 0.5, 1].map(function (f) {
-        return '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(P * f) + '" y2="' + y(P * f) + '" stroke="#D7E4E1" stroke-opacity="0.18" stroke-width="1"/>' +
-          '<text x="' + (L - 10) + '" y="' + (y(P * f) + 4) + '" text-anchor="end" font-size="12" fill="#D7E4E1">' + compact(P * f) + "</text>";
+        return '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(P * f) + '" y2="' + y(P * f) + '" stroke="#EAF3FA" stroke-opacity="0.16" stroke-width="1"/>' +
+          '<text x="' + (L - 10) + '" y="' + (y(P * f) + 4) + '" text-anchor="end" font-size="12" fill="#C9D6E3">' + compact(P * f) + "</text>";
       }).join("");
       var xl = ticks.map(function (t) {
         var anchor = t === 0 ? "start" : t === termYears ? "end" : "middle";
-        return '<text x="' + x(t) + '" y="' + (H - 12) + '" text-anchor="' + anchor + '" font-size="12" fill="#D7E4E1">' + (t === 0 ? "Today" : "Year " + t) + "</text>";
+        return '<text x="' + x(t) + '" y="' + (H - 12) + '" text-anchor="' + anchor + '" font-size="12" fill="#C9D6E3">' + (t === 0 ? "Today" : "Year " + t) + "</text>";
       }).join("");
       var svg = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-labelledby="chart-title"><title id="chart-title">Loan balance over time</title>' + grid + xl +
-        '<path d="' + area(base.years) + '" fill="#D7E4E1" fill-opacity="0.10"/>' +
-        '<path d="' + line(base.years) + '" fill="none" stroke="#D7E4E1" stroke-width="2.5"/>' +
-        (faster ? '<path d="' + line(faster.years) + '" fill="none" stroke="#E3A82B" stroke-width="3"/>' : "") +
+        '<path d="' + area(base.years) + '" fill="#9CC4EA" fill-opacity="0.12"/>' +
+        '<path d="' + line(base.years) + '" fill="none" stroke="#9CC4EA" stroke-width="2.5"/>' +
+        (faster ? '<path d="' + line(faster.years) + '" fill="none" stroke="#FFFFFF" stroke-width="3"/>' : "") +
         "</svg>";
       document.getElementById("chart").innerHTML = svg;
       document.getElementById("legend-extra").hidden = !faster;

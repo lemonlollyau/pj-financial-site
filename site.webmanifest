@@ -1,8 +1,8 @@
 {
-  "name": "P&J Financial Solutions",
-  "short_name": "P&J Finance",
+  "name": "P & J Financial Solutions",
+  "short_name": "P & J",
   "icons": [{ "src": "/img/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }],
-  "theme_color": "#0F3A40",
-  "background_color": "#F1F4F2",
+  "theme_color": "#112D4E",
+  "background_color": "#F8F7F4",
   "display": "browser"
 }

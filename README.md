@@ -1,6 +1,6 @@
-# P&J Financial Solutions website (2027 refresh)
+# P & J Financial Solutions website (2027 refresh)
 
-Static HTML/CSS/JS site for pjfinancialsolutions.com.au, built to replace the Divi/WordPress site. Hosted on Vercel, auto-deploys from GitHub `main`.
+Static HTML/CSS/JS site for pjfinancialsolutions.com.au, built to replace the Divi/WordPress site and styled to the **P & J Brand Refresh (November 2026)**: P & J Blue #0C71C3, Deep Navy #112D4E, Sky Wash #EAF3FA, Warm White #F8F7F4, Slate #526170; Manrope 600 headings, Inter body; original serif wordmark. Hosted on Vercel (`pj-financial-site`, lemonlolly team), auto-deploys from GitHub `lemonlollyau/pj-financial-site` `main`.
 
 ## What's here
 
@@ -14,11 +14,11 @@ Static HTML/CSS/JS site for pjfinancialsolutions.com.au, built to replace the Di
 | `privacy.html` | Privacy, Credit Guide and complaints (IDR/AFCA) |
 | `404.html` | Not-found page (Vercel serves it automatically) |
 | `styles.css`, `site.js` | Shared styles and scripts, no dependencies |
-| `fonts/` | Self-hosted Bodoni Moda + Public Sans (SIL OFL), Latin subset |
-| `img/` | Social share image, app icon |
+| `fonts/` | Self-hosted Manrope + Inter (SIL OFL), Latin subset |
+| `img/` | Logo (raster from the brand guide), home hero image, social share image, app icon |
 | `api/enquiry.js` | Vercel function that emails form enquiries via Resend |
 | `vercel.json` | Clean URLs, 301s from every old WordPress URL, security headers |
-| `sitemap.xml`, `robots.txt`, `site.webmanifest`, `favicon.*` | SEO and icons |
+| `sitemap.xml`, `robots.txt`, `site.webmanifest`, `favicon.png`, `favicon.ico` | SEO and icons |
 
 Header and footer are repeated in each page. If you change the nav or footer, change it in every `.html` file (Claude can do this in one go).
 
@@ -43,8 +43,9 @@ Header and footer are repeated in each page. If you change the nav or footer, ch
 - [ ] **Postal address** PO Box 594, South Fremantle WA 6162 (from the 2018 PDF) is still current.
 - [ ] **Awards wording.** Site says "finalist in industry business excellence awards in 2015, 2018, 2019, 2020 and 2022, in residential and commercial categories", read from the old badge filenames. Get exact award names to list properly.
 - [ ] **Lender panel.** Site lists ANZ, Commonwealth Bank, NAB, Westpac, ING, Suncorp, St.George, Resimac. Three old logos were unlabelled screenshots; add any missing lenders.
-- [ ] **Team headshots.** Monogram tiles are 4:5; drop in portraits at the same ratio (min 800×1000px).
-- [ ] **Logo.** The wordmark is typeset in Bodoni Moda to match the existing logo. Swap in the master vector file if they have one.
+- [ ] **Team headshots.** Initials tiles are 4:5; drop in natural portraits at the same ratio (min 800×1000px), consistent light and background per the brand guide.
+- [ ] **Vector logo.** `img/pj-logo.png` is the 379×85 raster from the brand guide (cropped). Swap in the original vector (SVG) for sharp rendering at 220px.
+- [ ] **Hero photography.** The home hero house is the AI-generated creative reference from the brand guide. Replace with commissioned or licensed photography before launch.
 - [ ] **Office hours** (not on the old site; add to contact page if wanted).
 - [ ] Analytics (GA4) and Google Business Profile link, if used.
 
