@@ -1,0 +1,41 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/index.php", "destination": "/", "permanent": true },
+    { "source": "/index.php/about-us", "destination": "/about", "permanent": true },
+    { "source": "/index.php/about-us/directors", "destination": "/team", "permanent": true },
+    { "source": "/index.php/about-us/team-members", "destination": "/team", "permanent": true },
+    { "source": "/index.php/testimonials", "destination": "/testimonials", "permanent": true },
+    { "source": "/index.php/services", "destination": "/#services", "permanent": true },
+    { "source": "/index.php/lenders", "destination": "/about#lenders", "permanent": true },
+    { "source": "/index.php/contact-us", "destination": "/contact", "permanent": true },
+    { "source": "/contact-us", "destination": "/contact", "permanent": true },
+    { "source": "/index.php/loan-calculator", "destination": "/calculator", "permanent": true },
+    { "source": "/home-loan-calculator", "destination": "/calculator", "permanent": true },
+    { "source": "/loan-calculator", "destination": "/calculator", "permanent": true },
+    { "source": "/index.php/privacy-policy-dispute-resolution", "destination": "/privacy", "permanent": true },
+    { "source": "/wp-content/uploads/2021/03/P-J-Financial-Solutions-Privacy-Policy.pdf", "destination": "/privacy", "permanent": true },
+    { "source": "/wp-content/uploads/2021/03/P-J-Financial-Solutions-Dispute-Resolution-Process-1-October-2018.pdf", "destination": "/privacy", "permanent": true },
+    { "source": "/wp-content/:path*", "destination": "/", "permanent": false },
+    { "source": "/index.php/feed", "destination": "/", "permanent": true },
+    { "source": "/feed", "destination": "/", "permanent": true },
+    { "source": "/wp-admin/:path*", "destination": "/", "permanent": false },
+    { "source": "/wp-login.php", "destination": "/", "permanent": false }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+      ]
+    },
+    {
+      "source": "/fonts/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
+  ]
+}

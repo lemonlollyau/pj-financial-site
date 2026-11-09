@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pjfinancialsolutions.com.au/sitemap.xml
