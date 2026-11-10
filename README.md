@@ -37,12 +37,20 @@ Header and footer are repeated in each page. If you change the nav or footer, ch
 
 The contact and homepage forms post to `api/enquiry.js`, which emails each enquiry to **admin@pjfinancialsolutions.com.au** from `website@pjfinancialsolutions.com.au`, with Reply-To set to the enquirer. If sending fails, the visitor is told to call or email instead, so no enquiry is silently lost.
 
-Setup (once):
-1. **Resend account** (resend.com, free tier is plenty). In Resend → Domains → Add `pjfinancialsolutions.com.au` (region: Sydney, ap-southeast-2, if offered).
-2. **DNS at VentraIP**: add the three records Resend shows. They are a DKIM TXT record (`resend._domainkey`) and an MX + SPF TXT record on the `send` subdomain. They don't change the root domain, so Microsoft 365 email is unaffected. Wait for Resend to show the domain as **Verified**.
-3. **API key**: Resend → API Keys → create a key with *Sending access* for that domain only.
-4. **Vercel**: Project → Settings → Environment Variables → add `RESEND_API_KEY` (Production, mark as Sensitive). Redeploy (Deployments → … → Redeploy).
-5. **Check**: open `https://pj-financial-site.vercel.app/api/enquiry`. It should show `"configured":true`.
+Setup status (10 Nov 2026): `pjfinancialsolutions.com.au` has been added to lemonlolly's Resend account (region Tokyo, ap-northeast-1, the closest offered; receiving **off**, click/open tracking **off**). Waiting on client approval, then DNS.
+
+1. **DNS at VentraIP**: add these three records (host names are relative to pjfinancialsolutions.com.au; TTL default/Auto). They don't change the root domain's MX, SPF or DMARC, so Microsoft 365 email is unaffected.
+
+   | Type | Host / Name | Value |
+   |---|---|---|
+   | TXT | `resend._domainkey` | `p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCqnDFeA9emZL85QlGB0pe6VQS+nv2RvlTfIxc7stBoL6HFKboE3M2DHfOb6GA/cCbjfov3WeAGS5R9E8JGvmMZgzvJ5pl13bZg2NcMl00DF7b3J8ThopjA+bYgkvleRHYaA7zecLsV6NOXEAwTT30kEhlo4o8X6Y6s3yFfyO+RVQIDAQAB` |
+   | CNAME | `rsend` | `rsend-apne1.forge.rmta.net` |
+   | CNAME | `send` | `send.forge.rmta.net` |
+
+2. **Verify**: Resend → Domains → pjfinancialsolutions.com.au → *I've added the records* / Verify. Wait for **Verified**.
+3. **API key**: Resend → API Keys → Create: name `P & J website enquiries (Vercel)`, permission *Sending access*, domain `pjfinancialsolutions.com.au` (this option only appears once the domain is verified; don't use *All domains*).
+4. **Vercel**: Project → Settings → Environment Variables → add `RESEND_API_KEY` (Production, Sensitive). Redeploy.
+5. **Check**: `https://pj-financial-site.vercel.app/api/enquiry` should show `"configured":true`.
 6. **Test**: send one enquiry from `/contact` and confirm it arrives in admin@. If it lands in Junk, mark it *Not junk* (or add `website@pjfinancialsolutions.com.au` to safe senders in Microsoft 365).
 
 Optional overrides: `ENQUIRY_TO` (comma-separate for more recipients), `ENQUIRY_FROM`.
