@@ -19,7 +19,7 @@ Static HTML/CSS/JS site for pjfinancialsolutions.com.au, built to replace the Di
 | `img/team/` | Staff portraits (from the old site, upscaled, cut out and placed on the brand Sky Wash background) |
 | `img/badges/` | FAST Business Excellence Awards finalist badges (2015–2022) and MFAA badges, cut to clean circles; shown in the footer band on every page |
 | `api/enquiry.js` | Vercel function that emails form enquiries via Resend |
-| `vercel.json` | Clean URLs, 301s from every old WordPress URL, security headers |
+| `vercel.json` | Clean URLs, permanent redirects from every old WordPress URL (with and without `/index.php/`, trailing slashes handled), catch-all for other old `/index.php/` pages, security headers |
 | `sitemap.xml`, `robots.txt`, `site.webmanifest`, `favicon.png`, `favicon.ico` | SEO and icons |
 
 Header and footer are repeated in each page. If you change the nav or footer, change it in every `.html` file (Claude can do this in one go).
