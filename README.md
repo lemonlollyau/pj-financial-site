@@ -28,14 +28,26 @@ Header and footer are repeated in each page. If you change the nav or footer, ch
 
 1. Create a private GitHub repo (e.g. `pj-financial-site`) and push this folder to `main`.
 2. Vercel → Add New → Project → Import the repo. Framework preset **Other**, no build command, output directory `.`. Deploy.
-3. Vercel → Settings → Environment Variables (Production):
-   - `RESEND_API_KEY` – from resend.com
-   - `ENQUIRY_TO` – `admin@pjfinancialsolutions.com.au` (comma-separate for more)
-   - `ENQUIRY_FROM` – e.g. `P&J Website <website@pjfinancialsolutions.com.au>` (verify the domain in Resend first by adding its DNS records)
-   Redeploy, then send a test enquiry from `/contact`.
+3. Enquiry emails (see **Enquiry form email** below). Only `RESEND_API_KEY` is required; enquiries go to `admin@pjfinancialsolutions.com.au` by default.
 4. Check the `*.vercel.app` preview with the client and get sign-off (see checklist below).
-5. Domain: Vercel → Settings → Domains → add `pjfinancialsolutions.com.au` and `www.pjfinancialsolutions.com.au`. At the DNS host, point the apex A record to `76.76.21.21` and `www` CNAME to `cname.vercel-dns.com` (use whatever Vercel shows). **Leave MX/email records alone.** Set `www` to redirect to the apex so SEO isn't split.
+5. Domain: Vercel → Settings → Domains → add `pjfinancialsolutions.com.au` and `www.pjfinancialsolutions.com.au`. DNS for the domain is on **VentraIP** nameservers (`ns1/ns2/ns3.nameserver.net.au`, used for VentraIP reseller hosting, so access may sit with whoever hosts the old WordPress site), not SiteGround. In that DNS manager, point the apex A record to `76.76.21.21` and `www` CNAME to `cname.vercel-dns.com` (use whatever Vercel shows). **Do not touch the MX, root SPF (`v=spf1 include:spf.protection.outlook.com -all`) or autodiscover records**: P & J's email runs on Microsoft 365. Redirect `www` to the apex in Vercel.
 6. Google Search Console: verify the domain, submit `https://pjfinancialsolutions.com.au/sitemap.xml`.
+
+## Enquiry form email
+
+The contact and homepage forms post to `api/enquiry.js`, which emails each enquiry to **admin@pjfinancialsolutions.com.au** from `website@pjfinancialsolutions.com.au`, with Reply-To set to the enquirer. If sending fails, the visitor is told to call or email instead, so no enquiry is silently lost.
+
+Setup (once):
+1. **Resend account** (resend.com, free tier is plenty). In Resend → Domains → Add `pjfinancialsolutions.com.au` (region: Sydney, ap-southeast-2, if offered).
+2. **DNS at VentraIP**: add the three records Resend shows. They are a DKIM TXT record (`resend._domainkey`) and an MX + SPF TXT record on the `send` subdomain. They don't change the root domain, so Microsoft 365 email is unaffected. Wait for Resend to show the domain as **Verified**.
+3. **API key**: Resend → API Keys → create a key with *Sending access* for that domain only.
+4. **Vercel**: Project → Settings → Environment Variables → add `RESEND_API_KEY` (Production, mark as Sensitive). Redeploy (Deployments → … → Redeploy).
+5. **Check**: open `https://pj-financial-site.vercel.app/api/enquiry`. It should show `"configured":true`.
+6. **Test**: send one enquiry from `/contact` and confirm it arrives in admin@. If it lands in Junk, mark it *Not junk* (or add `website@pjfinancialsolutions.com.au` to safe senders in Microsoft 365).
+
+Optional overrides: `ENQUIRY_TO` (comma-separate for more recipients), `ENQUIRY_FROM`.
+
+DMARC is currently `p=none`; Resend's DKIM signing on the domain means enquiries pass DMARC if it's tightened later.
 
 ## Before launch: confirm with the client
 
@@ -44,7 +56,7 @@ Header and footer are repeated in each page. If you change the nav or footer, ch
 - [ ] **Complaints policy.** The current PDF was last reviewed 1 Oct 2018 and uses 21/30/45-day timeframes from before ASIC RG 271 (Oct 2021). Ask BLSSA for the current complaints policy, Privacy Policy and Credit Guide, and confirm BLSSA's complaints contact details (Level 15, 360 Elizabeth St Melbourne, 03 9320 1082, resolutions@BLSSA.com.au, copied from the 2018 PDF). Add the PDFs to `/downloads/` and link them from `privacy.html`.
 - [ ] **Postal address** PO Box 594, South Fremantle WA 6162 (from the 2018 PDF) is still current.
 - [x] **Awards.** Footer shows all eight FAST finalist badges (2015 residential + commercial, 2017–2022) and both MFAA badges; About page copy matches.
-- [ ] **Lender panel.** Site lists ANZ, Commonwealth Bank, NAB, Westpac, ING, Suncorp, St.George, Resimac. Three old logos were unlabelled screenshots; add any missing lenders.
+- [x] **Lender panel.** Confirmed by client (10 Nov): ANZ, Commonwealth Bank, NAB, Westpac, Macquarie Bank, ING, St.George, Ubank, P&N Bank.
 - [x] **Team photos.** Client approved using the old-site photos (208–233px originals); refreshed onto the brand background. New headshots would look sharper on high-resolution screens.
 - [ ] **Vector logo.** `img/pj-logo.png` is the 379×85 raster from the brand guide (cropped). Swap in the original vector (SVG) for sharp rendering at 220px.
 - [ ] **Hero photography.** The home hero house is the AI-generated creative reference from the brand guide. Replace with commissioned or licensed photography before launch.
