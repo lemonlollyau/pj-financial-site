@@ -30,7 +30,11 @@ Header and footer are repeated in each page. If you change the nav or footer, ch
 2. Vercel → Add New → Project → Import the repo. Framework preset **Other**, no build command, output directory `.`. Deploy.
 3. Enquiry emails (see **Enquiry form email** below). Only `RESEND_API_KEY` is required; enquiries go to `admin@pjfinancialsolutions.com.au` by default.
 4. Check the `*.vercel.app` preview with the client and get sign-off (see checklist below).
-5. Domain: Vercel → Settings → Domains → add `pjfinancialsolutions.com.au` and `www.pjfinancialsolutions.com.au`. DNS for the domain is on **VentraIP** nameservers (`ns1/ns2/ns3.nameserver.net.au`, used for VentraIP reseller hosting, so access may sit with whoever hosts the old WordPress site), not SiteGround. In that DNS manager, point the apex A record to `76.76.21.21` and `www` CNAME to `cname.vercel-dns.com` (use whatever Vercel shows). **Do not touch the MX, root SPF (`v=spf1 include:spf.protection.outlook.com -all`) or autodiscover records**: P & J's email runs on Microsoft 365. Redirect `www` to the apex in Vercel.
+5. Domain (at launch, after client sign-off). Both domains are already added to the Vercel project (10 Nov): `pjfinancialsolutions.com.au` → Production, `www.pjfinancialsolutions.com.au` → 308 redirect to the apex. DNS is on VentraIP nameservers (`ns1/ns2/ns3.nameserver.net.au`); the current site is on a separate host at `35.213.244.220`. At the DNS host:
+   - **A** `@`: change `35.213.244.220` → `216.198.79.1` (replace, don't add a second A record)
+   - **www**: delete the A record `35.213.244.220`, add **CNAME** `www` → `f2b5e5f3d60767dd.vercel-dns-017.com.`
+   - Use whatever Vercel → Settings → Domains shows if it differs. No AAAA or CAA records exist today, so there's nothing to remove there. **Do not touch** MX, SPF, DMARC, autodiscover or other Microsoft 365 records.
+   - Keep the old hosting live for a couple of weeks after the switch, until everything is confirmed.
 6. Google Search Console: verify the domain, submit `https://pjfinancialsolutions.com.au/sitemap.xml`.
 
 ## Enquiry form email
