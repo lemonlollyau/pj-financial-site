@@ -41,7 +41,7 @@ Header and footer are repeated in each page. If you change the nav or footer, ch
 
 The contact and homepage forms post to `api/enquiry.js`, which emails each enquiry to **admin@pjfinancialsolutions.com.au** from `website@pjfinancialsolutions.com.au`, with Reply-To set to the enquirer. If sending fails, the visitor is told to call or email instead, so no enquiry is silently lost.
 
-Setup status (10 Nov 2026): `pjfinancialsolutions.com.au` has been added to lemonlolly's Resend account (region Tokyo, ap-northeast-1, the closest offered; receiving **off**, click/open tracking **off**). Waiting on client approval, then DNS.
+Setup status (11 Nov 2026): `pjfinancialsolutions.com.au` is **Verified** in lemonlolly's Resend account (region Tokyo, ap-northeast-1, the closest offered; receiving **off**, click/open tracking **off**). The three DNS records below are live at VentraIP. `RESEND_API_KEY` (sending access, restricted to this domain) is set in Vercel for Production. Steps 1–4 are done.
 
 1. **DNS at VentraIP**: add these three records (host names are relative to pjfinancialsolutions.com.au; TTL default/Auto). They don't change the root domain's MX, SPF or DMARC, so Microsoft 365 email is unaffected.
 
@@ -54,7 +54,7 @@ Setup status (10 Nov 2026): `pjfinancialsolutions.com.au` has been added to lemo
 2. **Verify**: Resend → Domains → pjfinancialsolutions.com.au → *I've added the records* / Verify. Wait for **Verified**.
 3. **API key**: Resend → API Keys → Create: name `P & J website enquiries (Vercel)`, permission *Sending access*, domain `pjfinancialsolutions.com.au` (this option only appears once the domain is verified; don't use *All domains*).
 4. **Vercel**: Project → Settings → Environment Variables → add `RESEND_API_KEY` (Production, Sensitive). Redeploy.
-5. **Check**: `https://pj-financial-site.vercel.app/api/enquiry` should show `"configured":true`.
+5. **Check**: `https://pjfinancialsolutions.com.au/api/enquiry` should show `"configured":true`.
 6. **Test**: send one enquiry from `/contact` and confirm it arrives in admin@. If it lands in Junk, mark it *Not junk* (or add `website@pjfinancialsolutions.com.au` to safe senders in Microsoft 365).
 
 Optional overrides: `ENQUIRY_TO` (comma-separate for more recipients), `ENQUIRY_FROM`.
